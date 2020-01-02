@@ -91,6 +91,7 @@ export default class FluidGallery {
       video.muted = true
       video.loop = true
       video.autoplay = true
+      video.setAttribute('crossorigin', 'anonymous')
 
       const texture = new THREE.VideoTexture(video)
       texture.minFilter = THREE.LinearFilter
