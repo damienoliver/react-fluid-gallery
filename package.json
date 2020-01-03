@@ -30,7 +30,7 @@
     "raf": "^3.4.1",
     "react-sizeme": "^2.5.2",
     "react-swipeable": "^4.3.0",
-    "three": "0.96.0"
+    "three": "^0.112.1"
   },
   "peerDependencies": {
     "prop-types": "^15.5.4",
