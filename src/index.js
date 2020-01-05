@@ -127,8 +127,8 @@ class ReactFluidGallery extends Component {
     this._gallery.update()
     this._gallery.render()
 
-    if (this._current !== this._gallery.currentSlideIndex) {
-      this._current = this._gallery.currentSlideIndex
+    if (this._current !== this._gallery.actualSlideIndex) {
+      this._current = this._gallery.actualSlideIndex
       onChange(this._current)
     }
 

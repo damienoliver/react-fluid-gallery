@@ -124,6 +124,11 @@ export default class FluidGallery {
     return (Math.floor(this._position) + n) % n
   }
 
+  get actualSlideIndex() {
+    const n = this._textures.length
+    return (Math.round(this._position) + n) % n
+  }
+
   get nextSlideIndex() {
     const n = this._textures.length
     return (this.currentSlideIndex + 1) % n
