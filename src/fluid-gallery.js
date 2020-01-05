@@ -29,6 +29,8 @@ export default class FluidGallery {
     this._time = 0
     this._speed = 0
     this._position = current
+    this._animatedPosition = current
+    this._animatingToNewPosition = false
 
     this._renderer = new THREE.WebGLRenderer({ canvas })
 
@@ -138,21 +140,37 @@ export default class FluidGallery {
     this._speed += event.deltaY * 0.0002
   }
 
+  newPosition(newPosition) {
+    this._animatedPosition = newPosition
+    this._animatingToNewPosition = true
+  }
+
   update() {
     this._time += 0.05
     this._material.uniforms.time.value = this._time
-
-    this._position += this._speed
-    this._speed *= 0.7
-
     const n = this._textures.length
-    const posI = Math.round(this._position)
-    const diff = posI - this._position
 
-    this._position += diff * 0.035
+    if (this._animatingToNewPosition) {
+      // direct animation to slide index
+      const animateDiff = this._animatedPosition - this._position
+      this._position += animateDiff * 0.05
+      if (Math.abs(this._animatedPosition - this._position) < 0.001) {
+        this._position = this._animatedPosition
+        this._animatingToNewPosition = false
+      }
+    } else {
+      // dynamic movement via mouse wheel or touch
+      this._position += this._speed
+      this._speed *= 0.7
 
-    if (Math.abs(posI - this._position) < 0.001) {
-      this._position = posI
+      const posI = Math.round(this._position)
+      const diff = posI - this._position
+
+      this._position += diff * 0.035
+
+      if (Math.abs(posI - this._position) < 0.001) {
+        this._position = posI
+      }
     }
 
     if (this._position < 0) {

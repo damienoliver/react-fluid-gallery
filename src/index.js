@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import raf from 'raf'
-import sizeMe from 'react-sizeme'
 import Swipeable from 'react-swipeable'
 
 import FluidGallery from './fluid-gallery'
@@ -16,11 +15,7 @@ class ReactFluidGallery extends Component {
     slides: PropTypes.arrayOf(PropTypes.string).isRequired,
     startAt: PropTypes.number,
     onChange: PropTypes.func,
-    style: PropTypes.object,
-    size: PropTypes.shape({
-      width: PropTypes.number,
-      height: PropTypes.number
-    })
+    style: PropTypes.object
   }
 
   static defaultProps = {
@@ -86,6 +81,11 @@ class ReactFluidGallery extends Component {
     )
   }
 
+  goto = (index) => {
+    if (this._gallery && index <= this.props.slides.length) {
+      this._gallery.newPosition(index)
+    }
+  }
   _containerRef = (ref) => {
     this._container = ref
   }
@@ -150,4 +150,4 @@ class ReactFluidGallery extends Component {
   }
 }
 
-export default sizeMe({ monitorWidth: true, monitorHeight: true })(ReactFluidGallery)
+export default ReactFluidGallery
