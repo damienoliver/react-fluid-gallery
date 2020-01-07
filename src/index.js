@@ -86,6 +86,19 @@ class ReactFluidGallery extends Component {
       this._gallery.newPosition(index)
     }
   }
+
+  next = () => {
+    if (this._gallery && this.props.slides) {
+      this._gallery.next()
+    }
+  }
+
+  prev = () => {
+    if (this._gallery && this.props.slides) {
+      this._gallery.prev()
+    }
+  }
+
   _containerRef = (ref) => {
     this._container = ref
   }

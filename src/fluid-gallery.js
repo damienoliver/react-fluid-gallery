@@ -145,6 +145,16 @@ export default class FluidGallery {
     this._animatingToNewPosition = true
   }
 
+  next() {
+    this._animatedPosition = Math.round(this._position) + 1
+    this._animatingToNewPosition = true
+  }
+
+  prev() {
+    this._animatedPosition = Math.round(this._position) - 1
+    this._animatingToNewPosition = true
+  }
+
   update() {
     this._time += 0.05
     this._material.uniforms.time.value = this._time
@@ -171,10 +181,9 @@ export default class FluidGallery {
       if (Math.abs(posI - this._position) < 0.001) {
         this._position = posI
       }
-    }
-
-    if (this._position < 0) {
-      this._position += n
+      if (this._position < 0) {
+        this._position += n
+      }
     }
 
     this._material.uniforms.progress.value = this._position
