@@ -28,10 +28,6 @@ class ReactFluidGallery extends Component {
     : (Math.random() * this.props.slides.length | 0)
   )
 
-  componentWillReceiveProps(props) {
-    this._onResize()
-  }
-
   componentDidMount() {
     window.addEventListener('resize', this._onResize)
     this._reset(this.props)
